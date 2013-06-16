@@ -1,31 +1,32 @@
 #!/bin/sh
 
-$master = $1
-$message = $2
+master=$1
+message=$2
+
+# Determine the starting branch
+#          Grab the branch                    | ltrim unused rows     Remove asterisk
+original=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
 
 # TODO: Create temporary backup branch
-# TODO: Definitely exit if this branch doesn't exist
-$temporary = 'tmp.1234'
+# TODO: Definitely exit if this branch exists
+tmpstr=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 14)
+temporary='tmp.'$tmpstr
 
 # Copy and move ref to temporary branch
+git checkout -b $temporary
 
-# Delete original branch
-
-# Move to master
-# TODO: This isn't necessary and could be replaced with a `git-branch`
-git checkout $master
-
-# Create "squashed" branch based off of master
-git checkout -b $original
+# Reset original branch to master
+git checkout -B $original
 
 # Pull over all files from temporary branch
 git checkout $temporary -- .
 
-# TODO: Collect the commit message of those in $original but not in $master
-$aggregate = ""
+# Collect the commit message of those in $original but not in $master
+aggregate=$(git log $master..$temporary)
+echo $aggregate
 
-# Commit files with aggregate commit messages and input message
-git commit -m "$message \n $aggregate"
+# # Commit files with aggregate commit messages and input message
+# git commit -m "$message \n $aggregate"
 
-# Delete backup branch
-git branch -D $temporary
+# # Delete backup branch
+# git branch -D $temporary
