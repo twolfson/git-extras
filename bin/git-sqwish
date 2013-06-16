@@ -25,7 +25,10 @@ git checkout $temporary -- .
 aggregate=$(git log $master..$temporary --format=format:%s)
 
 # Commit files with aggregate commit messages and input message
-git commit -m "$message \n $aggregate"
+git commit -F- <<EOF
+$message
+$aggregate
+EOF
 
 # Delete backup branch
 git branch -D $temporary
