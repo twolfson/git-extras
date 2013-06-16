@@ -1,0 +1,21 @@
+#!/bin/sh
+
+$master = $1
+$message = $2
+
+# TODO: Take care of the following steps
+# Checkout "master" branch
+git checkout $master
+
+# Checkout "squashed" branch
+# TODO: Prompt to overwrite if the branch currently exists
+git checkout -b $original.squashed
+
+# Pull over all files from original branch
+git checkout $original -- .
+
+# TODO: Collect the commit message of those in $original but not in $master
+$aggregate = ""
+
+# Commit files with aggregate commit messages and input message
+git commit -m "$message \n $aggregate"
