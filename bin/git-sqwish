@@ -7,13 +7,12 @@ message=$2
 #          Grab the branch                    | ltrim unused rows     Remove asterisk
 original=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
 
-# TODO: Create temporary backup branch
-# TODO: Definitely exit if this branch exists
+# Create temporary backup branch
 tmpstr=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 14)
 temporary='tmp.'$tmpstr
 
 # Copy and move ref to temporary branch
-git checkout -b $temporary
+git checkout -b $temporary || exit 1
 
 # Reset original branch to master
 git checkout -B $original $master
