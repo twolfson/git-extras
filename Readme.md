@@ -66,6 +66,7 @@ $ brew install git-extras
  - `git promote`
  - `git local-commits`
  - `git archive-file`
+ - `git sqwish`
 
 ## git-extras
 
@@ -448,6 +449,15 @@ Merge commits from `src-branch` into the current branch as a _single_ commit. Wh
 ```bash
 $ git squash fixed-cursor-styling
 $ git squash fixed-cursor-styling "Fixed cursor styling"
+```
+
+## git-sqwish &lt;master-branch&gt; [msg]
+
+Squash all commits from current branch into _one_ commit and place it on top of `master-branch`. `git-commit(1)` is automatically invoked every time with a commit message of all short messages from the commits being squashed. If `[msg]` is provided, it will be prepended to the commit message. This is useful for squashing all commits on a topic branch and you want to prepare it for a pull request.
+
+```bash
+$ git sqwish master
+$ git sqwish master "Added support for Feature A"
 ```
 
 ## git-changelog
