@@ -3,19 +3,29 @@
 $master = $1
 $message = $2
 
-# TODO: Take care of the following steps
-# Checkout "master" branch
+# TODO: Create temporary backup branch
+# TODO: Definitely exit if this branch doesn't exist
+$temporary = 'tmp.1234'
+
+# Copy and move ref to temporary branch
+
+# Delete original branch
+
+# Move to master
+# TODO: This isn't necessary and could be replaced with a `git-branch`
 git checkout $master
 
-# Checkout "squashed" branch
-# TODO: Prompt to overwrite if the branch currently exists
-git checkout -b $original.squashed
+# Create "squashed" branch based off of master
+git checkout -b $original
 
-# Pull over all files from original branch
-git checkout $original -- .
+# Pull over all files from temporary branch
+git checkout $temporary -- .
 
 # TODO: Collect the commit message of those in $original but not in $master
 $aggregate = ""
 
 # Commit files with aggregate commit messages and input message
 git commit -m "$message \n $aggregate"
+
+# Delete backup branch
+git branch -D $temporary
