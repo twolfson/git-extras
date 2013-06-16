@@ -16,17 +16,16 @@ temporary='tmp.'$tmpstr
 git checkout -b $temporary
 
 # Reset original branch to master
-git checkout -B $original
+git checkout -B $original $master
 
 # Pull over all files from temporary branch
 git checkout $temporary -- .
 
-# Collect the commit message of those in $original but not in $master
-aggregate=$(git log $master..$temporary)
-echo $aggregate
+# Collect the commit message of those in $original but not in $master (since..until)
+aggregate=$(git log $master..$temporary --format=format:%s)
 
-# # Commit files with aggregate commit messages and input message
-# git commit -m "$message \n $aggregate"
+# Commit files with aggregate commit messages and input message
+git commit -m "$message \n $aggregate"
 
-# # Delete backup branch
-# git branch -D $temporary
+# Delete backup branch
+git branch -D $temporary
