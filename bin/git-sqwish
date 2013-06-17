@@ -7,11 +7,23 @@ message=$2
 test -z $master && echo "Master branch required." 1>&2 && exit 1
 
 # If the working directory is dirty, complain and leave
-clean_status=$(git status | grep "nothing to commit (working directory clean)")
-test -z "$clean_status" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
+clean_status() {
+  git status | grep "nothing to commit (working directory clean)"
+}
+test -z "$(clean_status)" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
 
-# Assert we are up-to-date with master branch
+# Pull down changes from master
+git merge --no-commit $master 1> /dev/null 2> /dev/null
 
+# If the branch is dirty
+if test -z "$(clean_status)"; then
+  # Clean up changes
+  git reset --hard 1> /dev/null 2> /dev/null
+
+  # Complain and leave
+  echo "This branch is not up-to-date with $master. Please merge in changes." 1>&2
+  exit 1
+fi
 
 # Determine the starting branch
 #          Grab the branch                    | ltrim unused rows     Remove asterisk
