@@ -3,6 +3,9 @@
 master=$1
 message=$2
 
+# Assert we are provided with a master branch
+test -z $master && echo "Master branch required." 1>&2 && exit 1
+
 # Determine the starting branch
 #          Grab the branch                    | ltrim unused rows     Remove asterisk
 original=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
@@ -21,13 +24,23 @@ git checkout -B $original $master
 git checkout $temporary -- .
 
 # Collect the commit message of those in $original but not in $master (since..until)
-aggregate=$(git log $master..$temporary --format=format:%s)
+git log $master..$temporary --format=format:%s > .git/MERGE_MSG
 
-# Commit files with aggregate commit messages and input message
-git commit -F- <<EOF
+# If there is a message, commit files with input and aggregate messages
+if test -n "$message"; then
+  # Read in the message to memory and delete it
+  aggregate=$(cat .git/MERGE_MSG)
+  rm .git/MERGE_MSG
+
+  # Automatically commit with input and aggergate messages
+  git commit -F- <<EOF
 $message
 $aggregate
 EOF
+else
+# Otherwise, open a pre-filled commit dialog (via .git/MERGE_MSG)
+  git commit
+fi
 
 # Delete backup branch
 git branch -D $temporary
