@@ -17,7 +17,7 @@ git-sqwish(1) -- Compress changes in a branch
 
   &lt;commit-message&gt;
 
-  If commit-message is given, message will be prepended to the default summary (all commit summaries of squashed commits).
+  If commit-message is given, commit will be executed automatically and message will be prepended to the default summary (all commit summaries of squashed commits).
 
 ## EXAMPLES
 

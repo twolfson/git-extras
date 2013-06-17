@@ -453,7 +453,7 @@ $ git squash fixed-cursor-styling "Fixed cursor styling"
 
 ## git-sqwish &lt;master-branch&gt; [msg]
 
-Squash all commits from current branch into _one_ commit and place it on top of `master-branch`. `git-commit(1)` is automatically invoked every time with a commit message of all short messages from the commits being squashed. If `[msg]` is provided, it will be prepended to the commit message. This is useful for squashing all commits on a topic branch and you want to prepare it for a pull request.
+Squash all commits from current branch into _one_ commit and place it on top of `master-branch`. If `[msg]` is provided, `git-commit(1)` will be executed with `[msg]` and commit summaries of all squashed commits. Otherwise, a `git-commit(1)` prompt will be opened with commit summaries of all squashed commits. This is useful for squashing all commits on a topic branch and you want to prepare it for a pull request.
 
 ```bash
 $ git sqwish master
