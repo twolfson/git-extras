@@ -3,8 +3,15 @@
 master=$1
 message=$2
 
-# Assert we are provided with a master branch
+# If no master branc is provided, complain and leave
 test -z $master && echo "Master branch required." 1>&2 && exit 1
+
+# If the working directory is dirty, complain and leave
+clean_status=$(git status | grep "nothing to commit (working directory clean)")
+test -z "$clean_status" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
+
+# Assert we are up-to-date with master branch
+
 
 # Determine the starting branch
 #          Grab the branch                    | ltrim unused rows     Remove asterisk
