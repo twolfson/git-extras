@@ -65,7 +65,7 @@ _git_squash(){
   __gitcomp "$(__git_heads)"
 }
 
-_git_sqwish(){
+_git_squash_all(){
   __gitcomp "$(__git_heads)"
 }
 

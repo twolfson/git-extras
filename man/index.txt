@@ -27,8 +27,8 @@ git-rename-tag(1)             git-rename-tag
 git-repl(1)                   git-repl
 git-setup(1)                  git-setup
 git-show-tree(1)              git-show-tree
+git-squash-all(1)             git-squash-all
 git-squash(1)                 git-squash
-git-sqwish(1)                 git-sqwish
 git-summary(1)                git-summary
 git-touch(1)                  git-touch
 git-undo(1)                   git-undo
