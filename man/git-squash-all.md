@@ -1,9 +1,9 @@
-git-sqwish(1) -- Compress changes in a branch
+git-squash-all(1) -- Compress changes in a branch
 =============================================
 
 ## SYNOPSIS
 
-`git-sqwish` &lt;master-branch&gt; [&lt;commit-message&gt;]
+`git-squash-all` &lt;master-branch&gt; [&lt;commit-message&gt;]
 
 ## DESCRIPTION
 
@@ -13,7 +13,7 @@ git-sqwish(1) -- Compress changes in a branch
 
   &lt;master-branch&gt;
 
-  Branch to sqwish commits on top of.
+  Branch to squash-all commits on top of.
 
   &lt;commit-message&gt;
 
@@ -21,7 +21,7 @@ git-sqwish(1) -- Compress changes in a branch
 
 ## EXAMPLES
 
-    $ git sqwish master
+    $ git squash-all master
     Switched to a new branch 'tmp.1OSwoYazcoc7Df'
     Switched to and reset branch 'dev/my.feature'
     [dev/my.feature 97b70be] Added abc. Added def.
