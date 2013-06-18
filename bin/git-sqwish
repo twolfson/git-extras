@@ -30,7 +30,7 @@ fi
 original=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1/")
 
 # Create temporary backup branch
-tmpstr=$(tr -dc A-Za-z0-9 < /dev/urandom | head -c 14)
+tmpstr=$(date +%s)
 temporary='tmp.'$tmpstr
 
 # Copy and move ref to temporary branch
