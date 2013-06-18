@@ -69,6 +69,10 @@ _git_squash_all(){
   __gitcomp "$(__git_heads)"
 }
 
+_git_sqwish(){
+  __gitcomp "$(__git_heads)"
+}
+
 _git_undo(){
    __gitcomp "--hard --soft -h -s"
 }
