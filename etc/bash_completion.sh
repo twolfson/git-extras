@@ -70,7 +70,7 @@ _git_squash_all(){
 }
 
 _git_sqwish(){
-  __gitcomp "$(__git_heads)"
+  __gitcomp_nl "$(__git_refs '' $track)"
 }
 
 _git_undo(){
