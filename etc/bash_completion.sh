@@ -17,7 +17,7 @@ _git_count(){
 }
 
 _git_delete_branch(){
-  __gitcomp "$(__git_heads)"
+  __gitcomp_nl "$(__git_refs '' $track)"
 }
 
 _git_delete_submodule(){
@@ -41,7 +41,7 @@ _git_feature(){
 }
 
 _git_graft(){
-  __gitcomp "$(__git_heads)"
+  __gitcomp "$(__git_heads '' $track)"
 }
 
 _git_ignore(){
@@ -62,11 +62,15 @@ _git_refactor(){
 }
 
 _git_squash(){
-  __gitcomp "$(__git_heads)"
+  __gitcomp "$(__git_heads '' $track)"
+}
+
+_git_squash_all(){
+  __gitcomp "$(__git_heads '' $track)"
 }
 
 _git_sqwish(){
-  __gitcomp "$(__git_heads)"
+  __gitcomp_nl "$(__git_refs '' $track)"
 }
 
 _git_undo(){
