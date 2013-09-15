@@ -8,7 +8,7 @@ test -z $master && echo "Master branch required." 1>&2 && exit 1
 
 # If the working directory is dirty, complain and leave
 clean_status() {
-  git status | grep "nothing to commit (working directory clean)"
+  git status --porcelain
 }
 test -z "$(clean_status)" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
 
