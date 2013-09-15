@@ -10,13 +10,15 @@ test -z $master && echo "Master branch required." 1>&2 && exit 1
 clean_status() {
   git status --porcelain
 }
-test -z "$(clean_status)" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
+test -n "$(clean_status)" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
+
+exit 0
 
 # Pull down changes from master
 git merge --no-commit $master 1> /dev/null 2> /dev/null
 
 # If the branch is dirty
-if test -z "$(clean_status)"; then
+if test -n "$(clean_status)"; then
   # Clean up changes
   git reset --hard 1> /dev/null 2> /dev/null
 
