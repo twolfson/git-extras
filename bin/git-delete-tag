@@ -8,10 +8,10 @@ local_tags=""
 origin_refs=""
 for tagname in "$@"
 do
-  local_tags="$local_tags"" $tagname"
-  origin_refs="$origin_refs"" :refs/tags/$tagname"
+  local_tags=$local_tags" $tagname"
+  origin_refs=$origin_refs" :refs/tags/$tagname"
 done
 
 # Delete all the tags
-git tag -d "$local_tags"
-git push origin "$origin_refs"
+git tag -d $local_tags
+git push origin $origin_refs
