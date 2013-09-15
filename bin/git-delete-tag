@@ -3,7 +3,7 @@
 # Assert there is at least one tag provided
 test -z $1 && echo "tag required." 1>&2 && exit 1
 
-# Contatenate all the tag references
+# Concatenate all the tag references
 local_tags=""
 origin_refs=""
 for tagname in "$@"

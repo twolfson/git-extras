@@ -3,7 +3,7 @@
 # Assert there is at least one branch provided
 test -z $1 && echo "branch required." 1>&2 && exit 1
 
-# Contatenate all branch references
+# Concatenate all branch references
 local_branches=""
 origin_branches=""
 origin_refs=""
