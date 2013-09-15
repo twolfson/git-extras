@@ -8,8 +8,8 @@ local_tags=""
 origin_refs=""
 for tagname in "$@"
 do
-  local_tags="$local_tags"" '$tagname'"
-  origin_refs="$origin_refs"" ':refs/tags/$tagname'"
+  local_tags="$local_tags"" $tagname"
+  origin_refs="$origin_refs"" :refs/tags/$tagname"
 done
 
 # Delete all the tags
