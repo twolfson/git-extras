@@ -12,8 +12,6 @@ clean_status() {
 }
 test -n "$(clean_status)" && echo "Working directory is dirty. Please stash or commit changes." 1>&2 && exit 1
 
-exit 0
-
 # Pull down changes from master
 git merge --no-commit $master 1> /dev/null 2> /dev/null
 
